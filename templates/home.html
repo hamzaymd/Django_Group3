@@ -1,0 +1,56 @@
+{% extends "base.html" %} {% load static %} {% block content %}
+<!-- ========================= SECTION MAIN ========================= -->
+<section class="section-intro padding-y-sm d-flex justify-content-center">
+  <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img class="d-block w-100" src="{%static 'images/banners/1.jpg' %}" alt="First slide">
+      </div>
+      
+    </div>
+  </div>
+</section>
+
+<!-- ========================= SECTION MAIN END// ========================= -->
+
+<!-- ========================= SECTION  ========================= -->
+<section class="section-name padding-y-sm">
+  <div class="container">
+    <header class="section-heading">
+      <a href="{%url 'store' %}" class="btn btn-outline-primary float-right"
+        >See all</a
+      >
+      <h3 class="section-title">Popular products</h3>
+    </header>
+    <!-- sect-heading -->
+    <div class="row">
+      <!-- column start -->
+      {% for product in products %}
+      <div class="col-md-3">
+        <div class="card card-product-grid">
+          <a
+            href="{% url 'product_detail' product.category.slug product.slug %}"
+            class="img-wrap"
+          >
+            <img src="{{product.image.url}}" />
+          </a>
+          <figcaption class="info-wrap">
+            <a
+              href="{% url 'product_detail' product.category.slug product.slug %}"
+              class="title"
+              >{{product.product_name}}</a
+            >
+            <div class="price mt-1">${{product.price}}</div>
+            <!-- price-wrap.// -->
+          </figcaption>
+        </div>
+      </div>
+      <!-- col.// -->
+      {% endfor %}
+      <!-- row.// -->
+    </div>
+  </div>
+  <!-- container // -->
+</section>
+
+{% endblock content %}
